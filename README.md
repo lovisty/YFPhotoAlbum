@@ -63,8 +63,7 @@ self.photoAlbumViewController.assetsResultBlock = ^(NSMutableArray *assets){
 获取图片
 
 ```ruby
-    for (int i = 0; i < assets.count; i++) {
-        id objc = assets[i];
+    for (id objc in assets) {
         if ([objc isKindOfClass:[UIImage class]]) { //拍照的结果
             //objc 即为图片;
         }else if ([objc isKindOfClass:[PHAsset class]]){ //PhotoKit
