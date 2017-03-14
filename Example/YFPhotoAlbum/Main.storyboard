@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="o5G-UE-7Dx">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="U8A-Ku-9Ta">
+            <objects>
+                <navigationController id="o5G-UE-7Dx" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XKC-7l-QtO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="whP-gf-Uak" kind="relationship" relationship="rootViewController" id="AjM-6t-wbE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="14z-9j-iNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-996" y="112"/>
+        </scene>
+        <!--开始-->
+        <scene sceneID="wQg-tq-qST">
+            <objects>
+                <viewController title="开始" id="whP-gf-Uak" customClass="YFViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uEw-UM-LJ8"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mvr-aV-6Um"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TpU-gO-2f1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpv-N2-OxG">
+                                <rect key="frame" x="28" y="571" width="305" height="50"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="J0b-Vp-ueZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="选择多张">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="multiselectButtonClick:" destination="whP-gf-Uak" eventType="touchUpInside" id="kG3-li-err"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmd-Xt-DYu">
+                                <rect key="frame" x="22" y="491" width="305" height="50"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="KRr-de-wCm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="选择1张">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="singleselectionButtonClick:" destination="whP-gf-Uak" eventType="touchUpInside" id="WM9-Su-Jzg"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FGj-Cz-6Xw">
+                                <rect key="frame" x="0.0" y="64" width="375" height="393"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jpv-N2-OxG" firstAttribute="top" secondItem="bmd-Xt-DYu" secondAttribute="bottom" constant="30" id="3Dr-xa-7GB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jpv-N2-OxG" secondAttribute="trailing" constant="26" id="BFO-4g-f3z"/>
+                            <constraint firstAttribute="trailing" secondItem="FGj-Cz-6Xw" secondAttribute="trailing" id="C0F-wy-XXs"/>
+                            <constraint firstItem="bmd-Xt-DYu" firstAttribute="top" secondItem="FGj-Cz-6Xw" secondAttribute="bottom" constant="34" id="TNm-Uz-s9n"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bmd-Xt-DYu" secondAttribute="trailing" constant="32" id="ZeV-FY-d42"/>
+                            <constraint firstItem="FGj-Cz-6Xw" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leading" id="ehD-aE-XmU"/>
+                            <constraint firstItem="FGj-Cz-6Xw" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" id="fqr-0X-kRf"/>
+                            <constraint firstItem="bmd-Xt-DYu" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="6" id="h8G-aW-S7a"/>
+                            <constraint firstItem="Mvr-aV-6Um" firstAttribute="top" secondItem="jpv-N2-OxG" secondAttribute="bottom" constant="46" id="kpj-Gs-KRd"/>
+                            <constraint firstItem="jpv-N2-OxG" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="12" id="lNt-Ke-XM6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="选择" id="KXS-e1-FM0"/>
+                    <connections>
+                        <outlet property="contentView" destination="FGj-Cz-6Xw" id="wQP-UF-2iD"/>
+                        <outlet property="multiselectButton" destination="jpv-N2-OxG" id="Q2n-BJ-mNM"/>
+                        <outlet property="singleselectionButton" destination="bmd-Xt-DYu" id="06o-PC-6EX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-58" y="112"/>
+        </scene>
+    </scenes>
+</document>

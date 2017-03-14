@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'YFPhotoAlbum_Example' do
+  pod 'YFPhotoAlbum', :path => '../'
+
+  target 'YFPhotoAlbum_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

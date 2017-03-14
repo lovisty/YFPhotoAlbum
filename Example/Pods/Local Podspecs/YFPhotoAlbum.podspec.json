@@ -1,0 +1,22 @@
+{
+  "name": "YFPhotoAlbum",
+  "version": "0.1.0",
+  "summary": "A short description of YFPhotoAlbum.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/YaFei/YFPhotoAlbum",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "YaFei": "nihao1992@163.com"
+  },
+  "source": {
+    "git": "https://github.com/YaFei/YFPhotoAlbum.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "YFPhotoAlbum/Classes/**/*"
+}

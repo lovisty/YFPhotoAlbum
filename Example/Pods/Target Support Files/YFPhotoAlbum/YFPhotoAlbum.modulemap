@@ -1,0 +1,6 @@
+framework module YFPhotoAlbum {
+  umbrella header "YFPhotoAlbum-umbrella.h"
+
+  export *
+  module * { export * }
+}

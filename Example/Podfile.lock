@@ -1,0 +1,16 @@
+PODS:
+  - YFPhotoAlbum (0.1.0)
+
+DEPENDENCIES:
+  - YFPhotoAlbum (from `../`)
+
+EXTERNAL SOURCES:
+  YFPhotoAlbum:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  YFPhotoAlbum: cde014e9f026173c1d8e60c759c6f03abad719ac
+
+PODFILE CHECKSUM: 122362c5669822f7edf5f2971610aa832b34590b
+
+COCOAPODS: 1.2.0

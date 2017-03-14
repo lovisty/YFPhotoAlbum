@@ -1,0 +1,6 @@
+framework module Pods_YFPhotoAlbum_Tests {
+  umbrella header "Pods-YFPhotoAlbum_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
