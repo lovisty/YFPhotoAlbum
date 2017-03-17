@@ -1,22 +1,26 @@
 {
   "name": "YFPhotoAlbum",
-  "version": "0.1.0",
-  "summary": "A short description of YFPhotoAlbum.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/YaFei/YFPhotoAlbum",
-  "license": {
-    "type": "MIT",
-    "file": "LICENSE"
-  },
+  "version": "1.0",
+  "summary": "A Custom PhotoAlbum Which Support AssetsLibrary And PhotoKit..",
+  "description": "A Custom PhotoAlbum Which Support AssetsLibrary And PhotoKit.\nSupport for single or multi.\n* Markdown format.\n* Don't worry about the indent, we strip it!",
+  "homepage": "https://github.com/lovisty/YFPhotoAlbum",
+  "license": "MIT",
   "authors": {
-    "YaFei": "nihao1992@163.com"
+    "Zhao Yafei": "nihao1992@163.com"
   },
   "source": {
-    "git": "https://github.com/YaFei/YFPhotoAlbum.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/lovisty/YFPhotoAlbum.git",
+    "tag": "1.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "7.0"
   },
-  "source_files": "YFPhotoAlbum/Classes/**/*"
+  "requires_arc": true,
+  "source_files": "YFPhotoAlbum/Classes/*.{h,m}",
+  "resources": "YFPhotoAlbum/Assets/*.png",
+  "frameworks": [
+    "UIKit",
+    "Photos",
+    "AssetsLibrary"
+  ]
 }

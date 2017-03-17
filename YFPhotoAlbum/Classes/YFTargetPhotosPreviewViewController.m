@@ -8,9 +8,12 @@
 
 #import "YFTargetPhotosPreviewViewController.h"
 #import "YFPhotoAlbumManger.h"
-@interface YFTargetPhotosPreviewViewController ()<UIScrollViewDelegate>
+#import "YFPhotoPreviewCell.h"
 
-@property (nonatomic, strong) UIScrollView *contentScrollView;
+@interface YFTargetPhotosPreviewViewController ()<UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+
+
+@property (nonatomic, strong) UICollectionView *contentCollectionView;
 
 @end
 
@@ -19,75 +22,62 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.title = [NSString stringWithFormat:@"1/%ld 张",self.assets.count];
+    self.title = [NSString stringWithFormat:@"1 / %ld 张",self.assets.count];
     
-    for (int i = 0; i < self.assets.count; i++) {
-        id asset = self.assets[i];
-        if ([asset isKindOfClass:[UIImage class]]) {
-            UIImage *image = (UIImage *)asset;
-            CGSize newSize = [self handelSizeWithImageSize:image.size];
-            
-            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i*[[UIScreen mainScreen] bounds].size.width + ([[UIScreen mainScreen] bounds].size.width - newSize.width)/2, ([[UIScreen mainScreen] bounds].size.height-64-newSize.height)/2, newSize.width, newSize.height)];
-            imageView.image = image;
-            [self.contentScrollView addSubview:imageView];
-        }else if ([asset isKindOfClass:[PHAsset class]]){
-            YFPhotoAlbumManger *manger = [[YFPhotoAlbumManger alloc] init];
-            [manger thePhotoDataInPHAsset:asset PHImageInfo:^(UIImage *image, PHAsset *asset) {
-                CGSize newSize = [self handelSizeWithImageSize:image.size];
-                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i*[[UIScreen mainScreen] bounds].size.width + ([[UIScreen mainScreen] bounds].size.width - newSize.width)/2, ([[UIScreen mainScreen] bounds].size.height-64-newSize.height)/2, newSize.width, newSize.height)];
-                imageView.image = image;
-                [self.contentScrollView addSubview:imageView];
-            }];
-            
-        }else if ([asset isKindOfClass:[ALAsset class]]){
-            ALAssetRepresentation *representation = [asset defaultRepresentation];
-            CGImageRef imageReference = [representation fullScreenImage];
-            UIImage *image = [UIImage imageWithCGImage:imageReference];
-            CGSize newSize = [self handelSizeWithImageSize:image.size];
-            
-            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i*[[UIScreen mainScreen] bounds].size.width + ([[UIScreen mainScreen] bounds].size.width - newSize.width)/2, ([[UIScreen mainScreen] bounds].size.height-64-newSize.height)/2, newSize.width, newSize.height)];
-            imageView.image = image;
-            [self.contentScrollView addSubview:imageView];
-        }
+    [self.view addSubview:self.contentCollectionView];
+    
+    [self.contentCollectionView reloadData];
+}
+
+- (UICollectionView *)contentCollectionView{
+    if (!_contentCollectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        layout.minimumLineSpacing = 20;
+        layout.sectionInset = UIEdgeInsetsMake(0, 10, 0,10);
+        layout.itemSize = self.view.bounds.size;
+        
+        _contentCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(-10, 0, [[UIScreen mainScreen] bounds].size.width+20, [[UIScreen mainScreen] bounds].size.height-64) collectionViewLayout:layout];
+        _contentCollectionView.dataSource = self;
+        _contentCollectionView.delegate = self;
+        _contentCollectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        [_contentCollectionView registerClass:[YFPhotoPreviewCell class] forCellWithReuseIdentifier:NSStringFromClass([YFPhotoPreviewCell class])]
+        ;
+        _contentCollectionView.pagingEnabled = YES;
     }
-    
-    [self.view addSubview:self.contentScrollView];
+    return _contentCollectionView;
 }
 
-- (UIScrollView *)contentScrollView{
-    
-    if (!_contentScrollView) {
-        _contentScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
-        _contentScrollView.delegate = self;
-        _contentScrollView.contentSize = CGSizeMake([[UIScreen mainScreen] bounds].size.width*self.assets.count, [[UIScreen mainScreen] bounds].size.height);
-        _contentScrollView.showsHorizontalScrollIndicator = NO;
-        _contentScrollView.pagingEnabled = YES;
-        _contentScrollView.bounces = NO;
+#pragma mark - UICollectionDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.assets.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    YFPhotoPreviewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([YFPhotoPreviewCell class]) forIndexPath:indexPath];
+    id asset = self.assets[indexPath.row];
+    [cell theOriginalImageFromAsset:asset];
+    return cell;
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == self.contentCollectionView) {
+        
+        CGFloat page = scrollView.contentOffset.x/([[UIScreen mainScreen] bounds].size.width+20);
+        NSString *str = [NSString stringWithFormat:@"%.0f", page];
+        self.navigationItem.title = [NSString stringWithFormat:@"%ld / %ld",[str integerValue ] + 1,self.assets.count];
     }
-    return _contentScrollView;
 }
 
-- (CGSize)handelSizeWithImageSize:(CGSize)imageSize{
-    
-    CGFloat scale = imageSize.height/imageSize.width;
-    
-    while (imageSize.width > [[UIScreen mainScreen] bounds].size.width || imageSize.height > [[UIScreen mainScreen] bounds].size.height-64) {
-        if (imageSize.width>[[UIScreen mainScreen] bounds].size.width) {
-            imageSize.width = [[UIScreen mainScreen] bounds].size.width;
-            imageSize.height = imageSize.width*scale;
-            if (imageSize.height > [[UIScreen mainScreen] bounds].size.height - 64) {
-                imageSize.height = [[UIScreen mainScreen] bounds].size.height-64;
-            }
-        }
-    }
-    return imageSize;
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    NSInteger num = scrollView.contentOffset.x/[[UIScreen mainScreen] bounds].size.width+1;
-    self.title =  [NSString stringWithFormat:@"%ld/%ld 张",num,self.assets.count];
-
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     

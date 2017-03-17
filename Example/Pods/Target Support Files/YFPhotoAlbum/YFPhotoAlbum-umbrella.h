@@ -22,6 +22,7 @@
 #import "YFPhotoAlbumModel.h"
 #import "YFPhotoKitAlbumViewController.h"
 #import "YFPhotoModel.h"
+#import "YFPhotoPreviewCell.h"
 #import "YFPhotoTitleSwitcher.h"
 #import "YFSelectPhotoAlbumItemCell.h"
 #import "YFSelectPhotoAlbumView.h"
