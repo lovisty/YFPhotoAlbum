@@ -38,7 +38,6 @@
             assetsLibraryInfo(resultArray);
             //第一次默认遍历第一个相册分组 用于默认展示
             for (ALAssetsGroup *group in resultArray) {
-                NSLog(@"%@-------%@-------%@",[group valueForProperty:@"ALAssetsGroupPropertyName"],[group valueForProperty:@"ALAssetsGroupPropertyType"],[group valueForProperty:@"ALAssetsGroupPropertyURL"]);
                 if ([[group valueForProperty:@"ALAssetsGroupPropertyType"] intValue] == ALAssetsGroupSavedPhotos) {
                     [self allPhotoInALAssetsGroup:group ALAssetsoInfo:^(NSArray *photosInfoArray) {
                         ALAssetsoInfo(photosInfoArray);

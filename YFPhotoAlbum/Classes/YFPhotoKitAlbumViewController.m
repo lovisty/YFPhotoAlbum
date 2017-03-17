@@ -104,7 +104,6 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 }
 
 - (void)reloadCollectionView{
-    NSLog(@" 当前线程  %@",[NSThread currentThread]);
     self.navigationItem.titleView = self.titleSwitcher;
     self.photoAlbumView.listArray = [[[NSMutableArray alloc] initWithArray:[YFPhotoAlbumModel transformPHAssetCollectionToModelFrom:self.groups]] copy];
     [self.view bringSubviewToFront:self.photoAlbumView];
