@@ -68,7 +68,7 @@
     if ([asset isKindOfClass:[UIImage class]]) {
         UIImage *image = (UIImage *)asset;
         CGSize size = CGSizeMake(width*scale, width*scale*image.size.height/image.size.width);
-        self.imageView.image = [self  imageCompressWithSimple:asset scaledToSize:size];
+        self.imageView.image = [self imageCompressWithSimple:asset scaledToSize:size];
         [self calculateImageViewSize];
     }else if ([asset isKindOfClass:[ALAsset class]]){
         ALAssetRepresentation *representation = [asset defaultRepresentation];
@@ -80,8 +80,7 @@
     }else if ([asset isKindOfClass:[PHAsset class]]){
         __weak __typeof(self) weakSelf = self;
         PHAsset *tempAsset = asset;
-        CGSize size = CGSizeMake(width*scale, width*scale*tempAsset.pixelHeight/tempAsset.pixelWidth);
-        [self.manger thePhotoInPHAsset:asset targetSize:size PHImageInfo:^(UIImage *photo, PHAsset *asset) {
+        [self.manger theAppropriateOutputImageInPHAsset:asset PHImageInfo:^(UIImage *photo, PHAsset *asset) {
             __strong typeof(self) strongSelf = weakSelf;
             strongSelf.imageView.image = photo;
             [strongSelf calculateImageViewSize];

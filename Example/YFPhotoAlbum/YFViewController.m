@@ -65,7 +65,7 @@
     self.photoAlbumViewController.selectedAssets = self.selectedAssets;
     __weak __typeof(self) weakSelf = self;
     self.photoAlbumViewController.amountBeyondBlock = ^(){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不能超过1张" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil , nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不能超过1张" delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil , nil];
         [alert show];
 
     };
@@ -87,7 +87,7 @@
     self.photoAlbumViewController.selectedAssets = self.selectedAssets;
     __weak __typeof(self) weakSelf = self;
     self.photoAlbumViewController.amountBeyondBlock = ^(){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不能超过9张" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil , nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不能超过9张" delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil , nil];
         [alert show];
     };
     self.photoAlbumViewController.assetsResultBlock = ^(NSMutableArray *assets){
@@ -119,9 +119,9 @@
             imageV.image = objc;
         }else if ([objc isKindOfClass:[PHAsset class]]){
             PHAsset *asset = objc;
-            PHImageManager *imageManger = [PHImageManager defaultManager];
-            [imageManger requestImageForAsset:asset targetSize:CGSizeMake(80*2, 80*2) contentMode:PHImageContentModeDefault options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-                imageV.image = result;
+            YFPhotoAlbumManger *manger = [[YFPhotoAlbumManger alloc] init];
+            [manger theAppropriateOutputImageInPHAsset:asset PHImageInfo:^(UIImage *photo, PHAsset *asset) {
+                imageV.image = photo;
             }];
         }else if ([objc isKindOfClass:[ALAsset class]]){
             ALAsset *asset = objc;

@@ -165,12 +165,8 @@
         BOOL marked = NO;
         YFPhotoModel *model = [self.assetsImages objectAtIndex:indexPath.row];
         for (ALAsset *tempAssert in self.selectedAssets) {
-            if (tempAssert && [tempAssert isKindOfClass:[ALAsset class]]) {
-                NSString *url = [[tempAssert valueForProperty:ALAssetPropertyAssetURL] absoluteString];
-                NSString *url2 = [[model.asset valueForProperty:ALAssetPropertyAssetURL] absoluteString];
-                if ([url isEqualToString:url2]) {
-                    marked = YES;
-                }
+            if ([self.manger isSamePhotoBetweenAsset1:tempAssert withAsset2:model.asset]) {
+                marked = YES;
             }
         }
         
@@ -180,7 +176,6 @@
             }
             return;
         }
-        
         
         ALAsset *asset = model.asset;
         if (marked) {
@@ -211,12 +206,8 @@
 - (NSInteger)indexOfObject:(ALAsset *)asset fromArray:(NSArray *)array{
     for (int i = 0; i < array.count; i++) {
         ALAsset *tempAsset = array[i];
-        if([tempAsset isKindOfClass:[ALAsset class]]){
-            NSString *url1 = [[tempAsset valueForProperty:ALAssetPropertyAssetURL] absoluteString];
-            NSString *url2 = [[asset valueForProperty:ALAssetPropertyAssetURL] absoluteString];
-            if ([url1 isEqual:url2]) {
-                return i;
-            }
+        if ([self.manger isSamePhotoBetweenAsset1:tempAsset withAsset2:asset]) {
+            return i;
         }
     }
     return 0;
@@ -234,17 +225,6 @@
     
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
-
-- (UIImage *)getImage:(NSInteger)row
-{
-    UIImage *image = nil;
-    YFPhotoModel *model = [self.assetsImages objectAtIndex:row];
-    ALAssetRepresentation *representation = [model.asset defaultRepresentation];
-    CGImageRef imageReference = [representation fullScreenImage];
-    image = [UIImage imageWithCGImage:imageReference];
-    return image;
-}
-
 
 - (void)switchAssetsGroup:(YFPhotoAlbumModel *)model{
     [self.photoAlbumView dismissWithView:self.shadeView];

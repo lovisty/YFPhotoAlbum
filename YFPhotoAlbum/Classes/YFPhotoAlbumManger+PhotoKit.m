@@ -6,11 +6,12 @@
 //  Copyright © 2017年 boohee. All rights reserved.
 //
 
+#define MaxImageWidth 500
+
 #import "YFPhotoAlbumManger+PhotoKit.h"
 
 @implementation YFPhotoAlbumManger (PhotoKit)
 
-// 获取相册分组
 - (void)allGroupInfo:(PhotoKitAllGrougsBlock)allGrougsInfo{
     
     self.assetCollections = [NSMutableArray array];
@@ -43,7 +44,13 @@
     allGrougsInfo(self.assetCollections);
 }
 
-//获取 PHAssetCollection 的相册封面图片
+- (PHFetchResult *)theFetchResultPhotoInAssetCollection:(PHAssetCollection *)assetCollection{
+    PHFetchOptions *options = [PHFetchOptions new];
+    options.predicate = [NSPredicate predicateWithFormat:@"mediaType == %ld", PHAssetMediaTypeImage];
+    PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollection options:options];
+    return fetchResult;
+}
+
 - (void)theCoverPhotoInPHAssetGroup:(PHAssetCollection *)assetCollection PHImageInfo:(PHImageBlock)PHImageInfo{
     
     PHFetchResult *fetchResult = [self theFetchResultPhotoInAssetCollection:assetCollection];
@@ -61,7 +68,13 @@
     }];
 }
 
-//同步获取指定大小的图片
+- (void)thePreviewPhotoInPHAsset:(PHAsset *)asset PHImageInfo:(PHImageBlock)PHImageInfo{
+    PHImageManager *manger = [PHImageManager defaultManager];
+    [manger requestImageForAsset:asset targetSize:CGSizeMake(([[UIScreen mainScreen] bounds].size.width-15)/3, ([[UIScreen mainScreen] bounds].size.width-15)/3) contentMode:PHImageContentModeAspectFill options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        PHImageInfo(result,asset);
+    }];
+}
+
 - (void)thePhotoInPHAsset:(PHAsset *)asset targetSize:(CGSize)targetSize PHImageInfo:(PHImageBlock)PHImageInfo{
     PHImageManager *manger = [PHImageManager defaultManager];
     PHImageRequestOptions * options = [[PHImageRequestOptions alloc] init];
@@ -75,7 +88,29 @@
     }];
 }
 
-//根据 PHAsset 获取照片原尺寸
+- (void)theAppropriateOutputImageInPHAsset:(PHAsset *)asset PHImageInfo:(PHImageBlock)PHImageInfo{
+    CGFloat scale = [UIScreen mainScreen].scale;
+    CGFloat width = MIN([[UIScreen mainScreen] bounds].size.width, MaxImageWidth);
+    CGSize size = CGSizeMake(width*scale, width*scale*asset.pixelHeight/asset.pixelWidth);
+    [self thePhotoInPHAsset:asset targetSize:size PHImageInfo:^(UIImage *photo, PHAsset *asset) {
+        PHImageInfo(photo,asset);
+    }];
+}
+
+- (void)theOriginaPhotoDataInPHAsset:(PHAsset *)asset PHImageInfo:(PHImageBlock)PHImageInfo{
+    PHImageManager *manger = [PHImageManager defaultManager];
+    PHImageRequestOptions * options = [[PHImageRequestOptions alloc] init];
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+    options.synchronous = YES;
+    options.resizeMode = PHImageRequestOptionsResizeModeFast;
+    options.networkAccessAllowed = NO;
+
+    [manger requestImageDataForAsset:asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+        UIImage *image = [UIImage imageWithData:imageData];
+        PHImageInfo(image,asset);
+    }];
+}
+
 - (void)theOriginalPhotoInPHAsset:(PHAsset *)asset PHImageInfo:(PHImageBlock)PHImageInfo{
     PHImageManager *manger = [PHImageManager defaultManager];
     
@@ -90,41 +125,6 @@
     }];
 }
 
-//根据 PHAsset 获取照片预览图
-- (void)thePreviewPhotoInPHAsset:(PHAsset *)asset PHImageInfo:(PHImageBlock)PHImageInfo{
-    PHImageManager *manger = [PHImageManager defaultManager];
-    [manger requestImageForAsset:asset targetSize:CGSizeMake(([[UIScreen mainScreen] bounds].size.width-15)/3, ([[UIScreen mainScreen] bounds].size.width-15)/3) contentMode:PHImageContentModeAspectFill options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-        PHImageInfo(result,asset);
-    }];
-}
-
-//根据 PHAsset 获取照片Data
-- (void)thePhotoDataInPHAsset:(PHAsset *)asset PHImageInfo:(PHImageBlock)PHImageInfo{
-    PHImageManager *manger = [PHImageManager defaultManager];
-    PHImageRequestOptions * options = [[PHImageRequestOptions alloc] init];
-    options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
-    options.synchronous = YES;
-    options.resizeMode = PHImageRequestOptionsResizeModeFast;
-    options.networkAccessAllowed = NO;
-
-    [manger requestImageDataForAsset:asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
-        UIImage *image = [UIImage imageWithData:imageData];
-        NSData *image_data = UIImageJPEGRepresentation(image, 0.6);
-        image = nil;
-        PHImageInfo([UIImage imageWithData:image_data],asset);
-    }];
-}
-
-
-//获取分组的 PHFetchResult
-- (PHFetchResult *)theFetchResultPhotoInAssetCollection:(PHAssetCollection *)assetCollection{
-    PHFetchOptions *options = [PHFetchOptions new];
-    options.predicate = [NSPredicate predicateWithFormat:@"mediaType == %ld", PHAssetMediaTypeImage];
-    PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollection options:options];
-    return fetchResult;
-}
-
-//判断是否为iCloud照片
 - (void)isICloudPhotoInAsset:(PHAsset *)asset PHICloudInfo:(PHICloudBlock)PHICloudInfo{
     PHImageManager *manger = [PHImageManager defaultManager];
     PHImageRequestOptions * options = [[PHImageRequestOptions alloc] init];
@@ -139,6 +139,5 @@
             PHICloudInfo(@(YES));
         }
     }];
-    
 }
 @end

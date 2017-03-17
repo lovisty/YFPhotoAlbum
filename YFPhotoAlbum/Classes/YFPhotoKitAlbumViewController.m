@@ -170,14 +170,10 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
             }
             cell.selectedImageView.hidden = NO;
             for (PHAsset *tempAssert in weakSelf.selectedAssets) {
-                if (tempAssert && [tempAssert isKindOfClass:[PHAsset class]]) {
-                    NSString *url = tempAssert.localIdentifier;
-                    NSString *url2 = asset.localIdentifier;
-                    if ([url isEqualToString:url2]) {
-                        self.lastIndexItem = indexPath.item;
-                        marked = YES;
-                        break;
-                    }
+                if ([self.manger isSamePhotoBetweenAsset1:tempAssert withAsset2:asset]) {
+                    self.lastIndexItem = indexPath.item;
+                    marked = YES;
+                    break;
                 }
             }
             if (marked) {
@@ -213,13 +209,9 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
         
         BOOL marked = NO;
         for (PHAsset *tempAssert in self.selectedAssets) {
-            if (tempAssert && [tempAssert isKindOfClass:[PHAsset class]]) {
-                NSString *url = tempAssert.localIdentifier;
-                NSString *url2 = asset.localIdentifier;
-                
-                if ([url isEqualToString:url2]) {
-                    marked = YES;
-                }
+            if ([self.manger isSamePhotoBetweenAsset1:tempAssert withAsset2:asset]) {
+                marked = YES;
+                break;
             }
         }
         
