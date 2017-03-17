@@ -65,8 +65,9 @@
     self.photoAlbumViewController.selectedAssets = self.selectedAssets;
     __weak __typeof(self) weakSelf = self;
     self.photoAlbumViewController.amountBeyondBlock = ^(){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",@"不能超过"] delegate:nil cancelButtonTitle:nil otherButtonTitles:nil , nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不能超过1张" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil , nil];
         [alert show];
+
     };
     self.photoAlbumViewController.assetsResultBlock = ^(NSMutableArray *assets){
         __strong typeof(self) strongSelf = weakSelf;
@@ -86,7 +87,7 @@
     self.photoAlbumViewController.selectedAssets = self.selectedAssets;
     __weak __typeof(self) weakSelf = self;
     self.photoAlbumViewController.amountBeyondBlock = ^(){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",@"不能超过"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil , nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不能超过9张" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil , nil];
         [alert show];
     };
     self.photoAlbumViewController.assetsResultBlock = ^(NSMutableArray *assets){

@@ -63,7 +63,7 @@
         strongSelf.navigationItem.titleView = strongSelf.titleSwitcher;
         if (strongSelf.groups.count>0) {
             strongSelf.tipLabel.hidden = YES;
-            [strongSelf.titleSwitcher setTitle:[strongSelf.groups[0] valueForProperty:ALAssetsGroupPropertyName]];
+            [strongSelf.titleSwitcher setTitle:@"所有照片"];
         }else{
             [strongSelf.titleSwitcher setTitle:@""];
         }
@@ -75,14 +75,12 @@
         UIImage *camera = [UIImage imageNamed:@"yf_camera"];
         YFPhotoModel *model = [YFPhotoModel new];
         model.image = camera;
-        model.isSelected = NO;
         [strongSelf.assetsImages addObject:model];
         [photoArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop){
             __strong __typeof(self) strongSelf = weakSelf;
             ALAsset *asset = obj;
             YFPhotoModel *model = [YFPhotoModel new];
             model.asset = asset;
-            model.isSelected = NO;
             [strongSelf.assetsImages addObject:model];
         }];
         [strongSelf.collectionView reloadData];
@@ -120,7 +118,7 @@
     YFPhotoAlbumCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([YFPhotoAlbumCollectionViewCell class]) forIndexPath:indexPath];
     
     YFPhotoModel *model = [self.assetsImages objectAtIndex:indexPath.row];
-    BOOL marked = model.isSelected;
+    BOOL marked = NO;
     
     for (ALAsset *tempAssert in self.selectedAssets) {
         if (tempAssert && [tempAssert isKindOfClass:[ALAsset class]]) {
@@ -162,10 +160,10 @@
         }else{
             [self openCamera];
         }
-    }else {
         
+    }else {
+        BOOL marked = NO;
         YFPhotoModel *model = [self.assetsImages objectAtIndex:indexPath.row];
-        BOOL marked = model.isSelected;
         for (ALAsset *tempAssert in self.selectedAssets) {
             if (tempAssert && [tempAssert isKindOfClass:[ALAsset class]]) {
                 NSString *url = [[tempAssert valueForProperty:ALAssetPropertyAssetURL] absoluteString];
@@ -183,22 +181,29 @@
             return;
         }
         
-       
+        
         ALAsset *asset = model.asset;
         if (marked) {
-            
             NSInteger index = [self indexOfObject:asset fromArray:self.selectedAssets];
             [self.selectedAssets removeObjectAtIndex:index];
         }else{
-            if (self.maxCount<=1 && self.lastIndexItem>0) {
-                YFPhotoAlbumCollectionViewCell *cell = (YFPhotoAlbumCollectionViewCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.lastIndexItem inSection:0]];
-                cell.selectedImageView.image = [UIImage imageNamed:@"yf_pick_image_unselected"];
-                [self.selectedAssets removeAllObjects];
+            ALAssetRepresentation* representation = [asset defaultRepresentation];
+            UIImage *image =  [representation fullScreenImage];
+            if (image) {
+                if (self.maxCount<=1 && self.lastIndexItem>0) {
+                    YFPhotoAlbumCollectionViewCell *cell = (YFPhotoAlbumCollectionViewCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.lastIndexItem inSection:0]];
+                    cell.selectedImageView.image = [UIImage imageNamed:@"yf_pick_image_unselected"];
+                    [self.selectedAssets removeAllObjects];
+                }
+                [self.selectedAssets addObject:asset];
+                
+                self.lastIndexItem = indexPath.item;
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"图片不可用" message:@"该图片资源在iCloud上，请到手机相册里下载，然后重新进入该页面选择" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+                [alert show];
             }
-            [self.selectedAssets addObject:asset];
         }
         [self.photoBottomView configDataWithCount:self.selectedAssets.count];
-        model.isSelected = !marked;
         [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
     }
 }
@@ -244,10 +249,13 @@
 - (void)switchAssetsGroup:(YFPhotoAlbumModel *)model{
     [self.photoAlbumView dismissWithView:self.shadeView];
     self.showStatus = NO;
+    
     ALAssetsGroup *group = model.group;
+    
     if (self.currentGroup == group) {
         return;
     }
+    [self.titleSwitcher setTitle:[group valueForProperty:ALAssetsGroupPropertyName]];
     self.currentGroup = group ;
     [self.assetsImages removeAllObjects];
     
@@ -257,20 +265,17 @@
         UIImage *camera = [UIImage imageNamed:@"yf_camera"];
         YFPhotoModel *model = [YFPhotoModel new];
         model.image = camera;
-        model.isSelected = NO;
         [strongSelf.assetsImages addObject:model];
+        
         
         [photoArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop){
             __strong __typeof(self) strongSelf = weakSelf;
             ALAsset *asset = obj;
             YFPhotoModel *model = [YFPhotoModel new];
             model.asset = asset;
-            model.isSelected = NO;
             [strongSelf.assetsImages addObject:model];
         }];
-        
-        [strongSelf.titleSwitcher setTitle:[self.groups[0] valueForProperty:ALAssetsGroupPropertyName]];
-        [self.collectionView reloadData];
+        [strongSelf.collectionView reloadData];
     }];
 }
 - (BOOL)canContinueSelect{
@@ -285,7 +290,7 @@
 }
 - (void)finished{
     
-    if (self.selectedAssets.count != 0) {
+    if (self.selectedAssets.count > 0) {
         if (self.assetsResultBlock) {
             //预防bug
             if (self.maxCount == 1 && self.selectedAssets.count>1) {
@@ -294,7 +299,7 @@
                 [self.selectedAssets addObjectsFromArray:tempArray];
                 tempArray = nil;
             }
-
+            
             self.assetsResultBlock(self.selectedAssets);
             [self.selectedAssets removeAllObjects];
             self.selectedAssets = nil;
@@ -316,7 +321,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
     [self.selectedAssets addObject:image];
-   
+    
     if (self.assetsResultBlock) {
         //预防bug
         if (self.maxCount == 1 && self.selectedAssets.count>1) {

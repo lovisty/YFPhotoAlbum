@@ -124,4 +124,21 @@
     return fetchResult;
 }
 
+//判断是否为iCloud照片
+- (void)isICloudPhotoInAsset:(PHAsset *)asset PHICloudInfo:(PHICloudBlock)PHICloudInfo{
+    PHImageManager *manger = [PHImageManager defaultManager];
+    PHImageRequestOptions * options = [[PHImageRequestOptions alloc] init];
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+    options.synchronous = YES;
+    options.resizeMode = PHImageRequestOptionsResizeModeFast;
+    options.networkAccessAllowed = NO;
+    [manger requestImageDataForAsset:asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+        if(imageData){
+            PHICloudInfo(@(NO));
+        }else{
+            PHICloudInfo(@(YES));
+        }
+    }];
+    
+}
 @end

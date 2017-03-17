@@ -130,7 +130,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     self.showStatus = !self.showStatus;
 }
 - (void)buildNavigationItem
-{    
+{
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightButton setTitle:@"完成" forState:UIControlStateNormal];
     [rightButton setTitleColor:[UIColor colorWithRed:98/255 green:204/255 blue:116/255 alpha:1] forState:UIControlStateNormal];
@@ -185,7 +185,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
             }else{
                 cell.selectedImageView.image = [UIImage imageNamed:@"yf_pick_image_unselected"];
             }
-
+            
         }];
     }
     
@@ -207,8 +207,10 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
         }else{
             [self openCamera];
         }
+        self.lastIndexItem = indexPath.item;
     }else {
         PHAsset *asset = self.fetchResult[self.fetchResult.count-indexPath.item];
+        
         BOOL marked = NO;
         for (PHAsset *tempAssert in self.selectedAssets) {
             if (tempAssert && [tempAssert isKindOfClass:[PHAsset class]]) {
@@ -232,18 +234,31 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
             NSInteger index = [self indexOfObject:asset fromArray:self.selectedAssets];
             [self.selectedAssets removeObjectAtIndex:index];
         }else{
-            if (self.maxCount<=1 && self.lastIndexItem>0) {
-                YFPhotoAlbumCollectionViewCell *cell = (YFPhotoAlbumCollectionViewCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.lastIndexItem inSection:0]];
-                cell.selectedImageView.image = [UIImage imageNamed:@"yf_pick_image_unselected"];
-                [self.selectedAssets removeAllObjects];
-            }
-            [self.selectedAssets addObject:asset];
+            __weak __typeof(self) weakSelf = self;
+            [self.manger isICloudPhotoInAsset:asset PHICloudInfo:^(NSNumber *isICloud) {
+                __strong __typeof(self) strongSelf = weakSelf;
+                if (![isICloud boolValue]) {
+                    if (strongSelf.maxCount<=1 && strongSelf.lastIndexItem>0) {
+                        YFPhotoAlbumCollectionViewCell *cell = (YFPhotoAlbumCollectionViewCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.lastIndexItem inSection:0]];
+                        cell.selectedImageView.image = [UIImage imageNamed:@"yf_pick_image_unselected"];
+                        [strongSelf.selectedAssets removeAllObjects];
+                    }
+                    [strongSelf.selectedAssets addObject:asset];
+                    
+                    self.lastIndexItem = indexPath.item;
+                    
+                }else{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"图片不可用" message:@"该图片资源在iCloud上，请到手机相册里下载，然后重新进入该页面选择" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+                    [alert show];
+                }
+            }];
         }
         [self.photoBottomView configDataWithCount:self.selectedAssets.count];
         [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
     }
-    self.lastIndexItem = indexPath.item;
 }
+
+
 
 - (NSInteger)indexOfObject:(PHAsset *)asset fromArray:(NSArray *)array{
     for (int i = 0; i < array.count; i++) {
@@ -312,7 +327,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 }
 - (void)finished{
     
-    if (self.selectedAssets.count != 0) {
+    if (self.selectedAssets.count > 0) {
         if (self.assetsResultBlock) {
             //预防bug
             if (self.maxCount == 1 && self.selectedAssets.count>1) {
@@ -383,7 +398,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     // The preheat window is twice the height of the visible rect
     CGRect preheatRect = self.collectionView.bounds;
     preheatRect = CGRectInset(preheatRect, 0.0, -0.5 * CGRectGetHeight(preheatRect));
-
+    
     // If scrolled by a "reasonable" amount...
     CGFloat delta = ABS(CGRectGetMidY(preheatRect) - CGRectGetMidY(self.previousPreheatRect));
     
@@ -418,7 +433,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
         self.previousPreheatRect = preheatRect;
     }
     
-
+    
 }
 
 - (NSArray *)qb_indexPathsForElementsInRect:(CGRect)rect
@@ -476,8 +491,4 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     }
     return assets;
 }
-
-//- (void)dealloc{
-//    NSLog(@"dealloc-dealloc");
-//}
 @end

@@ -38,6 +38,7 @@ typedef void(^ALAssetsBlock)(NSArray *photoArray);
 
 typedef void(^PhotoKitAllGrougsBlock)(NSArray *groupArray);
 typedef void(^PHImageBlock)(UIImage *photo, PHAsset *asset);
+typedef void(^PHICloudBlock)(NSNumber *isICloud);
 
 @interface YFPhotoAlbumManger (PhotoKit)
 
@@ -65,4 +66,7 @@ typedef void(^PHImageBlock)(UIImage *photo, PHAsset *asset);
 
 //获取某个分组的照片集合
 - (PHFetchResult *)theFetchResultPhotoInAssetCollection:(PHAssetCollection *)assetCollection;
+
+//判断是否为iCloud照片
+- (void)isICloudPhotoInAsset:(PHAsset *)asset PHICloudInfo:(PHICloudBlock)PHICloudInfo;
 @end

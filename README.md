@@ -44,7 +44,7 @@ git clone https://github.com/lovisty/YFPhotoAlbum   
 初始化以及相关回调
 
 ```ruby
-self.photoAlbumViewController = [[BHCustomPhotoAlbumViewController alloc] init];
+self.photoAlbumViewController = [[YFCustomPhotoAlbumViewController alloc] init];
 self.photoAlbumViewController.maxCount = 9;// maxCount > 0, 默认是 1.
 self.photoAlbumViewController.selectedAssets = self.selectedAssets;//再次进入相册选择的时候，保留已选择的为选中状态。
 
