@@ -45,7 +45,7 @@
     self.collectionView.dataSource = self;
     [self.collectionView registerClass:[YFPhotoAlbumCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([YFPhotoAlbumCollectionViewCell class])];
 
-    self.collectionView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-50);
+    self.collectionView.frame = CGRectMake(0, 0, self.view.frame.size.width, [[UIScreen mainScreen] bounds].size.height-64-50);
     [self.view addSubview:self.collectionView];
     
     self.collectionView.backgroundColor = [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:248.0/255.0 alpha:1.0];
@@ -117,6 +117,9 @@
     
 }
 
+- (void)previewButtonClick{
+    //子类重载
+}
 
 //由子类重载 request
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
