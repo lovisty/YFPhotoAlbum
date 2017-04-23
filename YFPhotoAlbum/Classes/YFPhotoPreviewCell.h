@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface YFPhotoPreviewCell : UICollectionViewCell
-- (UIImage *)theOriginalImageFromAsset:(id)asset;
+- (void)theOriginalImageFromAsset:(id)asset;
 @end
