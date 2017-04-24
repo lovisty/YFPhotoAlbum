@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "YFPhotoAlbum"
-  s.version          = "1.0"
+  s.version          = "1.1"
   s.summary          = "A Custom PhotoAlbum Which Support AssetsLibrary And PhotoKit.."
   s.description      = <<-DESC
                        A Custom PhotoAlbum Which Support AssetsLibrary And PhotoKit.
