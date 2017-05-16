@@ -32,7 +32,10 @@ pod "YFPhotoAlbum"
 ```ruby
 git clone https://github.com/lovisty/YFPhotoAlbum   
 ```
-找到包含的文件Classes和Assets的YFPhotoAlbum文件，直接把YFPhotoAlbum拖到项目中。
+1、在 Build Phases 里分别添加 Photos.framework 和 AssetsLibrary.framework 框架
+2、在 plist 文件里添加权限声明 Privacy - Photo Library Usage Description 和 Privacy - Camera Usage Description
+3、找到包含的文件Classes和Assets的YFPhotoAlbum文件，直接把YFPhotoAlbum拖到项目中。
+
 
 **导入头文件：**
 ```ruby
