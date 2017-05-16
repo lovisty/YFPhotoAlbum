@@ -5,9 +5,6 @@
 //  Created by YaFei on 16/4/19.
 //  Copyright © 2016年 BOOHEE. All rights reserved.
 //
-typedef void(^YFAssetsResultBlock)(NSMutableArray *imageAsset);//选择结果
-typedef void(^YFAmountBeyondBlock)(void);//超出限制个数
-
 #import "YFPhotoAlbumBaseViewController.h"
 #import "YFPhotoAlbumManger.h"
 #import "YFPhotoAlbumCollectionViewCell.h"
@@ -15,6 +12,9 @@ typedef void(^YFAmountBeyondBlock)(void);//超出限制个数
 #import "YFSelectPhotoAlbumView.h"
 #import "YFPhotoAlbumBottomView.h"
 #import "YFPhotoTitleSwitcher.h"
+
+typedef void(^YFAssetsResultBlock)(NSMutableArray *imageAsset);//选择结果
+typedef void(^YFAmountBeyondBlock)(void);//超出限制个数
 
 @interface YFCustomPhotoAlbumViewController : YFPhotoAlbumBaseViewController<UICollectionViewDataSource,CHTCollectionViewDelegateWaterfallLayout>
 
