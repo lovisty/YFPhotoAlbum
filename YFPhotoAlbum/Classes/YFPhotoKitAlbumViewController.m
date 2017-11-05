@@ -379,7 +379,9 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self updateCachedAssets];
+    if (self.fetchResult.count>1) {
+        [self updateCachedAssets];
+    }
 }
 
 - (void)updateCachedAssets{
