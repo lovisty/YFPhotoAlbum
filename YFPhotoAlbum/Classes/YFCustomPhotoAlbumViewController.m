@@ -13,6 +13,7 @@
 #import "YFCustomPhotoAlbumViewController.h"
 #import "YFALAssertLibraryViewController.h"
 #import "YFPhotoKitAlbumViewController.h"
+#import "BHPhotoAlbumMacroDefine.h"
 
 @interface YFCustomPhotoAlbumViewController ()<YFSelectPhotoAlbumViewDelegate>
 
@@ -50,7 +51,7 @@
     
     self.collectionView.backgroundColor = [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:248.0/255.0 alpha:1.0];
     
-    self.photoBottomView.frame = CGRectMake(0, [[UIScreen mainScreen] bounds].size.height - 64 - 50, self.view.frame.size.width, 50);
+    self.photoBottomView.frame = CGRectMake(0, [[UIScreen mainScreen] bounds].size.height - 64 - 50- BlankHeight, self.view.frame.size.width, 50+BlankHeight);
     
     [self.view addSubview:self.photoBottomView];
 

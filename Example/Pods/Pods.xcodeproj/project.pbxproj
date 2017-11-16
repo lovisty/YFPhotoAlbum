@@ -11,6 +11,7 @@
 		0469A074593BA5A999A791E6D3907B2C /* YFSelectPhotoAlbumItemCell.h in Headers */ = {isa = PBXBuildFile; fileRef = D158D3840D0F87FA1B806D487CD2510F /* YFSelectPhotoAlbumItemCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C9D1188606A235107D4DF5B43DE0DC5 /* yf_photo_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE17197F41E1D378220E344CBC0F39 /* yf_photo_default@2x.png */; };
 		0F7FB106563528B5DF131404A152DFB5 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD2ABEBA647C65C5152A9E4335554C6 /* AssetsLibrary.framework */; };
+		16D1A7D31FBD735B001B3945 /* BHPhotoAlbumMacroDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 16D1A7D21FBD735A001B3945 /* BHPhotoAlbumMacroDefine.h */; };
 		1776AD7887033951F4BAAACF0531A575 /* YFPhotoAlbumBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F59BB788FB4828BF16A93DA56F97721 /* YFPhotoAlbumBottomView.m */; };
 		17F8854A9BE1EC0C6544BF2013284899 /* yf_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2744D7332EF232B80A2E8B26322C3D9 /* yf_camera@2x.png */; };
 		1D1F66C329C649D0293A647920F42437 /* YFPhotoKitAlbumViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 364237F81D492F7FCD94FB9316C0AA42 /* YFPhotoKitAlbumViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -79,11 +80,12 @@
 		06955FC145C4700923F2F53C28768BAF /* YFPhotoAlbumManger+ALAssetsLibrary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "YFPhotoAlbumManger+ALAssetsLibrary.h"; sourceTree = "<group>"; };
 		0C6C92C230F969174279D8C4C56A1EAF /* YFPhotoAlbumCollectionViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YFPhotoAlbumCollectionViewCell.m; sourceTree = "<group>"; };
 		0CC9B388BCED4834947DEE397697A631 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		16D1A7D21FBD735A001B3945 /* BHPhotoAlbumMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHPhotoAlbumMacroDefine.h; sourceTree = "<group>"; };
 		173218336D1D299A9185141CAC270C72 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Photos.framework; sourceTree = DEVELOPER_DIR; };
 		181813B9983EEFC00403153682D6256E /* YFSelectPhotoAlbumView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YFSelectPhotoAlbumView.m; sourceTree = "<group>"; };
 		18338ED1330B449D1A221BC4950426FE /* YFPhotoAlbumManger+ALAssetsLibrary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "YFPhotoAlbumManger+ALAssetsLibrary.m"; sourceTree = "<group>"; };
 		1ECA9F5D4D560E4511B82390C1B93596 /* YFPhotoAlbumManger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YFPhotoAlbumManger.h; sourceTree = "<group>"; };
-		2680C3CD2ADEC3BB3DDDF083CBF3E5AF /* Pods-YFPhotoAlbum_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-YFPhotoAlbum_Example.modulemap"; sourceTree = "<group>"; };
+		2680C3CD2ADEC3BB3DDDF083CBF3E5AF /* Pods-YFPhotoAlbum_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-YFPhotoAlbum_Example.modulemap"; sourceTree = "<group>"; };
 		26DE17197F41E1D378220E344CBC0F39 /* yf_photo_default@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "yf_photo_default@2x.png"; sourceTree = "<group>"; };
 		2D8FF0FF2F20DC87FA0998B362F10799 /* YFSelectPhotoAlbumItemCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YFSelectPhotoAlbumItemCell.m; sourceTree = "<group>"; };
 		30F61F02C368D6CCCA5BC0C2660042F7 /* Pods-YFPhotoAlbum_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YFPhotoAlbum_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,11 +114,11 @@
 		816C562D74D176F7485EEC6112235534 /* yf_pick_image_unselected@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "yf_pick_image_unselected@2x.png"; sourceTree = "<group>"; };
 		864B83D80400621DEEF533536DC0F4C1 /* YFPhotoAlbumManger+PhotoKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "YFPhotoAlbumManger+PhotoKit.h"; sourceTree = "<group>"; };
 		8887362D6F587DD460DA8E3EFF76F79C /* Pods-YFPhotoAlbum_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-YFPhotoAlbum_Tests-resources.sh"; sourceTree = "<group>"; };
-		89A8BC08226E83AED64A070660DB472F /* YFPhotoAlbum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = YFPhotoAlbum.framework; path = YFPhotoAlbum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		89A8BC08226E83AED64A070660DB472F /* YFPhotoAlbum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YFPhotoAlbum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B7A32DAE6AC298A1197476369A8F7DC /* YFPhotoKitAlbumViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YFPhotoKitAlbumViewController.m; sourceTree = "<group>"; };
-		8E90BFD12A77BAF50E7395AD883A1996 /* Pods-YFPhotoAlbum_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-YFPhotoAlbum_Tests.modulemap"; sourceTree = "<group>"; };
+		8E90BFD12A77BAF50E7395AD883A1996 /* Pods-YFPhotoAlbum_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-YFPhotoAlbum_Tests.modulemap"; sourceTree = "<group>"; };
 		8F59BB788FB4828BF16A93DA56F97721 /* YFPhotoAlbumBottomView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YFPhotoAlbumBottomView.m; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		94B0DEC209B24304407D0B3326D45512 /* YFPhotoModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YFPhotoModel.h; sourceTree = "<group>"; };
 		9759551D66A47BC72A0A3AD3A13A8AD1 /* YFTargetPhotosPreviewViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YFTargetPhotosPreviewViewController.m; sourceTree = "<group>"; };
 		A2744D7332EF232B80A2E8B26322C3D9 /* yf_camera@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "yf_camera@2x.png"; sourceTree = "<group>"; };
@@ -131,7 +133,7 @@
 		D698BE620012B178B8E5D4AD0514E31A /* YFPhotoModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YFPhotoModel.m; sourceTree = "<group>"; };
 		D7214C309D5950A69AB16624E0E9BEA6 /* YFPhotoTitleSwitcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YFPhotoTitleSwitcher.m; sourceTree = "<group>"; };
 		D930C1CAAD3F1C4B6FA6E7A2C4797795 /* YFPhotoAlbum-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "YFPhotoAlbum-umbrella.h"; sourceTree = "<group>"; };
-		DECCE8F4C799934E28049ADF0BE84E24 /* Pods_YFPhotoAlbum_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_YFPhotoAlbum_Example.framework; path = "Pods-YFPhotoAlbum_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DECCE8F4C799934E28049ADF0BE84E24 /* Pods_YFPhotoAlbum_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YFPhotoAlbum_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF40409409B6DC0433568FCE6BCC35F3 /* Pods-YFPhotoAlbum_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YFPhotoAlbum_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E11514BA1585E7947D939C66C20C5E85 /* YFPhotoAlbum-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "YFPhotoAlbum-dummy.m"; sourceTree = "<group>"; };
 		E16BD523E9469CAB885A758B6B697D8D /* YFCHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YFCHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
@@ -142,8 +144,8 @@
 		ED9E504BADA76A4BFD84DD8BDED6048E /* Pods-YFPhotoAlbum_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-YFPhotoAlbum_Example-resources.sh"; sourceTree = "<group>"; };
 		F0D29B34C4E9A4CC7FA671285E7E3180 /* yf_bullet_down@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "yf_bullet_down@2x.png"; sourceTree = "<group>"; };
 		F3FB655872844ACC2EA7F623B3075DE2 /* yf_bullet_up@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "yf_bullet_up@2x.png"; sourceTree = "<group>"; };
-		FBE35F95C0DF6ED679CCF3E610CF5480 /* Pods_YFPhotoAlbum_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_YFPhotoAlbum_Tests.framework; path = "Pods-YFPhotoAlbum_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC89165020B434F8079D82BD9A715DD6 /* YFPhotoAlbum.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = YFPhotoAlbum.modulemap; sourceTree = "<group>"; };
+		FBE35F95C0DF6ED679CCF3E610CF5480 /* Pods_YFPhotoAlbum_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YFPhotoAlbum_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC89165020B434F8079D82BD9A715DD6 /* YFPhotoAlbum.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = YFPhotoAlbum.modulemap; sourceTree = "<group>"; };
 		FD85F532C40E689D1187FA3A05768E4E /* Pods-YFPhotoAlbum_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-YFPhotoAlbum_Example-dummy.m"; sourceTree = "<group>"; };
 		FEAD55020D21785BFC306054CF2F4860 /* Pods-YFPhotoAlbum_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-YFPhotoAlbum_Tests-frameworks.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,7 +194,6 @@
 			children = (
 				70CE2158C2A341BAE52998F80AD2F79C /* Assets */,
 			);
-			name = YFPhotoAlbum;
 			path = YFPhotoAlbum;
 			sourceTree = "<group>";
 		};
@@ -265,8 +266,8 @@
 				181813B9983EEFC00403153682D6256E /* YFSelectPhotoAlbumView.m */,
 				75ED5ED69B27FA37BF4EFD4129C8D65A /* YFTargetPhotosPreviewViewController.h */,
 				9759551D66A47BC72A0A3AD3A13A8AD1 /* YFTargetPhotosPreviewViewController.m */,
+				16D1A7D21FBD735A001B3945 /* BHPhotoAlbumMacroDefine.h */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -296,7 +297,6 @@
 				45F033DA0C29595065D00891DD9C9F99 /* yf_pick_image_selected@2x.png */,
 				816C562D74D176F7485EEC6112235534 /* yf_pick_image_unselected@2x.png */,
 			);
-			name = Assets;
 			path = Assets;
 			sourceTree = "<group>";
 		};
@@ -345,7 +345,6 @@
 			children = (
 				418D054486EA7B0407DEBC47CE1B167B /* Classes */,
 			);
-			name = YFPhotoAlbum;
 			path = YFPhotoAlbum;
 			sourceTree = "<group>";
 		};
@@ -387,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AE56DAFB5CA986EFF56E7C3543A9322 /* Pods-YFPhotoAlbum_Example-umbrella.h in Headers */,
+				16D1A7D31FBD735B001B3945 /* BHPhotoAlbumMacroDefine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

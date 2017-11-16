@@ -56,7 +56,7 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.previewButton.frame = CGRectMake(20, 12, 40, self.frame.size.height-24);
+    self.previewButton.frame = CGRectMake(20, 12, 40, 26);
     self.titleLabel.frame = CGRectMake(70, self.previewButton.center.y-10, 50, 20);
     
 
