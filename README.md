@@ -42,7 +42,7 @@ git clone https://github.com/lovisty/YFPhotoAlbum   
 
 
 **导入头文件：**
-```ruby
+```objective-c
 #import "YFCustomPhotoAlbumViewController.h"  
 ```
 
@@ -50,7 +50,7 @@ git clone https://github.com/lovisty/YFPhotoAlbum   
 
 初始化以及相关回调
 
-```ruby
+```objective-c
 self.photoAlbumViewController = [[YFCustomPhotoAlbumViewController alloc] init];
 self.photoAlbumViewController.maxCount = 9;// maxCount > 0, 默认是 1.
 self.photoAlbumViewController.selectedAssets = self.selectedAssets;//再次进入相册选择的时候，保留已选择的为选中状态。
@@ -69,7 +69,7 @@ self.photoAlbumViewController.assetsResultBlock = ^(NSMutableArray *assets){
 
 获取图片
 
-```ruby
+```objective-c
     for (id objc in assets) {
         if ([objc isKindOfClass:[UIImage class]]) { //拍照的结果
             //objc 即为图片;
