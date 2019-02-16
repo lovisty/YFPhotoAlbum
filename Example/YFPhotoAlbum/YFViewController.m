@@ -12,7 +12,7 @@
 @interface YFViewController ()
 @property (nonatomic, strong) YFCustomPhotoAlbumViewController *photoAlbumViewController;
 @property (nonatomic, strong) NSMutableArray *selectedAssets;//用来记住选中的内容，再次选择的时候可以查看之前选中的照片
-@property (nonatomic, assign) BOOL singleSelect;//如果两次选择不一样，情况之前的。（仅为了提现demo的功能）
+@property (nonatomic, assign) BOOL singleSelect;//如果两次选择不一样，清空之前的。（仅为了提现demo的功能）
 
 @end
 
